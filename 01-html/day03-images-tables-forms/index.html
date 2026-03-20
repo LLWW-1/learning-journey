@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片、表格与表单</title>
+    <style>
+        /* 今天加一点简单的样式，让表格和表单更好看 */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        input, textarea, select {
+            padding: 8px;
+            width: 100%;
+            max-width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>第三天学习：图片、表格与表单</h1>
+    
+    <!-- ==================== 1. 图片标签 ==================== -->
+    <h2>1. 图片标签 &lt;img&gt;</h2>
+    
+    <h3>1.1 网络图片</h3>
+    <p>使用网络图片地址（Lorem Picsum 随机图片）</p>
+    <img src="https://picsum.photos/300/200?random=1" alt="随机风景图1" width="300" height="200">
+    <img src="https://picsum.photos/300/200?random=2" alt="随机风景图2" width="300" height="200">
+    
+    <h3>1.2 本地图片（如果下载了图片）</h3>
+    <p>如果文件夹里有图片，可以用相对路径引用</p>
+    <!-- <img src="my-photo.jpg" alt="我的照片" width="200"> -->
+    <p><em>注：本地图片暂时没有，先用网络图片替代</em></p>
+    
+    <p><strong>img标签属性：</strong></p>
+    <ul>
+        <li><code>src</code>：图片地址（必须）</li>
+        <li><code>alt</code>：图片加载失败时显示的替代文字（必须，对SEO和读屏软件友好）</li>
+        <li><code>width / height</code>：设置宽高（单位像素）</li>
+    </ul>
+    
+    <hr>
+    
+    <!-- ==================== 2. 表格标签 ==================== -->
+    <h2>2. 表格标签 &lt;table&gt;</h2>
+    
+    <h3>2.1 学习计划表</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>天数</th>
+                <th>学习内容</th>
+                <th>状态</th>
+                <th>备注</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Day 1</td>
+                <td>HTML基础结构</td>
+                <td>已完成</td>
+                <td>第一个网页</td>
+            </tr>
+            <tr>
+                <td>Day 2</td>
+                <td>文本标签与列表</td>
+                <td>已完成</td>
+                <td>链接也学了</td>
+            </tr>
+            <tr>
+                <td>Day 3</td>
+                <td>图片、表格、表单</td>
+                <td>学习中</td>
+                <td>今天的内容</td>
+            </tr>
+            <tr>
+                <td>Day 4</td>
+                <td>CSS基础</td>
+                <td>待学习</td>
+                <td>样式美化</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <h3>表格标签说明：</h3>
+    <ul>
+        <li><code>&lt;table&gt;</code>：表格容器</li>
+        <li><code>&lt;thead&gt;</code>：表头区域</li>
+        <li><code>&lt;tbody&gt;</code>：表格主体区域</li>
+        <li><code>&lt;tr&gt;</code>：表格行（Table Row）</li>
+        <li><code>&lt;th&gt;</code>：表头单元格（Table Header）</li>
+        <li><code>&lt;td&gt;</code>：普通单元格（Table Data）</li>
+    </ul>
+    
+    <hr>
+    
+    <!-- ==================== 3. 表单标签 ==================== -->
+    <h2>3. 表单标签 &lt;form&gt;</h2>
+    <p>表单用于收集用户输入的数据，是前后端交互的基础。</p>
+    
+    <h3>3.1 用户注册表单（示例）</h3>
+    <form action="#" method="post">
+        <div class="form-group">
+            <label for="username">用户名：</label>
+            <input type="text" id="username" name="username" placeholder="请输入用户名" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="password">密码：</label>
+            <input type="password" id="password" name="password" placeholder="请输入密码" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="email">邮箱：</label>
+            <input type="email" id="email" name="email" placeholder="example@email.com">
+        </div>
+        
+        <div class="form-group">
+            <label>性别：</label>
+            <label><input type="radio" name="gender" value="male"> 男</label>
+            <label><input type="radio" name="gender" value="female"> 女</label>
+        </div>
+        
+        <div class="form-group">
+            <label for="city">城市：</label>
+            <select id="city" name="city">
+                <option value="beijing">北京</option>
+                <option value="shanghai">上海</option>
+                <option value="guangzhou">广州</option>
+                <option value="shenzhen">深圳</option>
+                <option value="other">其他</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label>学习方向：</label>
+            <label><input type="checkbox" name="interest" value="html"> HTML</label>
+            <label><input type="checkbox" name="interest" value="css"> CSS</label>
+            <label><input type="checkbox" name="interest" value="js"> JavaScript</label>
+            <label><input type="checkbox" name="interest" value="react"> React</label>
+        </div>
+        
+        <div class="form-group">
+            <label for="message">自我介绍：</label><br>
+            <textarea id="message" name="message" rows="4" cols="40" placeholder="说说你为什么想学前端..."></textarea>
+        </div>
+        
+        <div class="form-group">
+            <button type="submit">提交注册</button>
+            <button type="reset">重置</button>
+        </div>
+    </form>
+    
+    <h3>表单标签说明：</h3>
+    <ul>
+        <li><code>&lt;form&gt;</code>：表单容器</li>
+        <li><code>&lt;input&gt;</code>：输入框，type属性决定类型（text/password/email/radio/checkbox等）</li>
+        <li><code>&lt;label&gt;</code>：标签，for属性关联input的id</li>
+        <li><code>&lt;select&gt;</code> + <code>&lt;option&gt;</code>：下拉选择框</li>
+        <li><code>&lt;textarea&gt;</code>：多行文本输入框</li>
+        <li><code>&lt;button&gt;</code>：按钮，type="submit"提交表单</li>
+    </ul>
+    
+    <hr>
+    
+    <!-- ==================== 4. 今日小结 ==================== -->
+    <h2>4. 今日小结</h2>
+    <p>今天学习了<strong>3类新标签</strong>：</p>
+    <ol>
+        <li>图片标签 <code>&lt;img&gt;</code> - 在网页中显示图片</li>
+        <li>表格标签 <code>&lt;table&gt;</code> - 展示结构化数据</li>
+        <li>表单标签 <code>&lt;form&gt;</code> - 收集用户输入</li>
+    </ol>
+    <p>现在可以做出功能更完整的网页了！</p>
+    
+    <hr>
+    <p>
+        <a href="#">⬆️ 返回顶部</a> | 
+        <a href="../day02-text-and-lists/index.html">← 查看第二天学习内容</a> | 
+        <a href="../day01-one/index.html">查看第一天学习内容 →</a>
+    </p>
+</body>
+</html>
