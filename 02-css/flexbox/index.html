@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexbox 弹性布局</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Flexbox 弹性布局</h1>
+    
+    <!-- 1. Flexbox 简介 -->
+    <div class="card">
+        <h2>什么是 Flexbox？</h2>
+        <p>Flexbox 是一种一维布局模型，可以让元素在容器内灵活排列，解决传统布局（浮动、定位）的复杂问题。</p>
+        <p><strong>核心思想：</strong> 让容器有能力改变子元素的宽度/高度/顺序，以最佳方式填充可用空间。</p>
+    </div>
+    
+    <!-- 2. 主轴与交叉轴 -->
+    <div class="card">
+        <h2>主轴与交叉轴</h2>
+        <div class="axis-demo">
+            <div class="axis-container">
+                <div class="axis-label">主轴 (Main Axis)</div>
+                <div class="axis-line main-axis"></div>
+                <div class="axis-label">交叉轴 (Cross Axis)</div>
+                <div class="axis-line cross-axis"></div>
+            </div>
+        </div>
+        <ul>
+            <li><strong>主轴</strong>：flex 项目排列的方向（默认水平从左到右）</li>
+            <li><strong>交叉轴</strong>：与主轴垂直的方向</li>
+        </ul>
+    </div>
+    
+    <!-- 3. flex-direction 练习 -->
+    <div class="card">
+        <h2>flex-direction：设置主轴方向</h2>
+        <div class="demo-section">
+            <p><code>flex-direction: row;</code> (默认，水平排列)</p>
+            <div class="flex-container row-demo">
+                <div class="flex-item">1</div>
+                <div class="flex-item">2</div>
+                <div class="flex-item">3</div>
+            </div>
+            
+            <p><code>flex-direction: column;</code> (垂直排列)</p>
+            <div class="flex-container column-demo">
+                <div class="flex-item">1</div>
+                <div class="flex-item">2</div>
+                <div class="flex-item">3</div>
+            </div>
+            
+            <p><code>flex-direction: row-reverse;</code> (反向水平排列)</p>
+            <div class="flex-container row-reverse-demo">
+                <div class="flex-item">1</div>
+                <div class="flex-item">2</div>
+                <div class="flex-item">3</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 4. justify-content 练习 -->
+    <div class="card">
+        <h2>justify-content：主轴对齐方式</h2>
+        <div class="demo-section">
+            <p><code>justify-content: flex-start;</code> (起始对齐)</p>
+            <div class="flex-container justify-start">
+                <div class="flex-item">1</div>
+                <div class="flex-item">2</div>
+                <div class="flex-item">3</div>
+            </div>
+            
+            <p><code>justify-content: center;</code> (居中对齐)</p>
+            <div class="flex-container justify-center">
+                <div class="flex-item">1</div>
+                <div class="flex-item">2</div>
+                <div class="flex-item">3</div>
+            </div>
+            
+            <p><code>justify-content: space-between;</code> (两端对齐)</p>
+            <div class="flex-container justify-between">
+                <div class="flex-item">1</div>
+                <div class="flex-item">2</div>
+                <div class="flex-item">3</div>
+            </div>
+            
+            <p><code>justify-content: space-around;</code> (均匀分布)</p>
+            <div class="flex-container justify-around">
+                <div class="flex-item">1</div>
+                <div class="flex-item">2</div>
+                <div class="flex-item">3</div>
+            </div>
+            
+            <p><code>justify-content: space-evenly;</code> (完全均匀)</p>
+            <div class="flex-container justify-evenly">
+                <div class="flex-item">1</div>
+                <div class="flex-item">2</div>
+                <div class="flex-item">3</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 5. align-items 练习 -->
+    <div class="card">
+        <h2>align-items：交叉轴对齐方式</h2>
+        <div class="demo-section">
+            <p><code>align-items: stretch;</code> (默认，拉伸填满)</p>
+            <div class="flex-container align-stretch" style="height: 150px;">
+                <div class="flex-item" style="height: auto;">1</div>
+                <div class="flex-item" style="height: auto;">2</div>
+                <div class="flex-item" style="height: auto;">3</div>
+            </div>
+            
+            <p><code>align-items: center;</code> (垂直居中)</p>
+            <div class="flex-container align-center" style="height: 150px;">
+                <div class="flex-item">1</div>
+                <div class="flex-item">2</div>
+                <div class="flex-item">3</div>
+            </div>
+            
+            <p><code>align-items: flex-end;</code> (底部对齐)</p>
+            <div class="flex-container align-end" style="height: 150px;">
+                <div class="flex-item">1</div>
+                <div class="flex-item">2</div>
+                <div class="flex-item">3</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 6. 实战：响应式导航栏 -->
+    <div class="card">
+        <h2>实战：响应式导航栏</h2>
+        <div class="navbar">
+            <div class="logo">我的网站</div>
+            <ul class="nav-links">
+                <li><a href="#">首页</a></li>
+                <li><a href="#">关于</a></li>
+                <li><a href="#">服务</a></li>
+                <li><a href="#">联系</a></li>
+            </ul>
+        </div>
+        <p>这个导航栏使用 Flexbox 实现，在手机屏幕上会自动换行！</p>
+    </div>
+    
+    <!-- 7. 实战：卡片网格 -->
+    <div class="card">
+        <h2>实战：响应式卡片网格</h2>
+        <div class="card-grid">
+            <div class="grid-card">
+                <div class="card-icon">📚</div>
+                <h3>HTML 基础</h3>
+                <p>学习了 HTML 标签、语义化、表单等基础知识。</p>
+                <span class="badge">已完成</span>
+            </div>
+            <div class="grid-card">
+                <div class="card-icon">🎨</div>
+                <h3>CSS 样式</h3>
+                <p>学习了选择器、盒子模型、颜色字体等。</p>
+                <span class="badge">已完成</span>
+            </div>
+            <div class="grid-card">
+                <div class="card-icon">📐</div>
+                <h3>Flexbox 布局</h3>
+                <p>学习了弹性布局，可以轻松实现各种布局。</p>
+                <span class="badge">学习中</span>
+            </div>
+            <div class="grid-card">
+                <div class="card-icon">🎯</div>
+                <h3>JavaScript</h3>
+                <p>下一阶段学习，让网页动起来！</p>
+                <span class="badge">待学习</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 8. 今日小结 -->
+    <div class="card">
+        <h2>今日小结</h2>
+        <ol>
+            <li><strong>flex-direction</strong>：设置主轴方向（row / column）</li>
+            <li><strong>justify-content</strong>：主轴对齐方式</li>
+            <li><strong>align-items</strong>：交叉轴对齐方式</li>
+            <li><strong>flex-wrap</strong>：是否换行</li>
+            <li><strong>flex</strong>：子元素如何伸缩</li>
+        </ol>
+        <p>Flexbox 是前端布局的核心技能，一定要多练习！</p>
+    </div>
+    
+    <hr>
+    <p>
+        <a href="../day04-css-basics/index.html">← 查看第四天学习内容</a> | 
+        <a href="#">返回顶部</a>
+    </p>
+</body>
+</html>
