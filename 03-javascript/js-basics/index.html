@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript 基础入门</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            border-left: 4px solid #e94560;
+            padding-left: 12px;
+        }
+
+        .demo-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 1px solid #dee2e6;
+        }
+
+        button {
+            background: #e94560;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 5px;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: #0f3460;
+            transform: scale(1.05);
+        }
+
+        input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            width: 200px;
+            margin: 5px;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #e94560;
+        }
+
+        .output {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            margin-top: 10px;
+        }
+
+        hr {
+            margin: 20px 0;
+        }
+
+        a {
+            color: #e94560;
+            text-decoration: none;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>JavaScript 基础入门</h1>
+
+    <!-- 1. 变量与数据类型 -->
+    <div class="card">
+        <h2>1. 变量与数据类型</h2>
+        <div class="demo-box">
+            <p><strong>变量声明：</strong> <code>let</code> (可变) / <code>const</code> (常量) / <code>var</code> (旧)</p>
+            <p><strong>数据类型：</strong> 字符串、数字、布尔、数组、对象</p>
+            <button id="showVariablesBtn">显示变量</button>
+            <div id="variablesOutput" class="output" style="margin-top: 10px;"></div>
+        </div>
+    </div>
+
+    <!-- 2. 运算符演示 -->
+    <div class="card">
+        <h2>2. 运算符</h2>
+        <div class="demo-box">
+            <p><strong>算术：</strong> + - * / %</p>
+            <p><strong>比较：</strong> > <>= <======!=!==</p>
+                        <p><strong>逻辑：</strong> && (与) || (或) ! (非)</p>
+                        <div class="btn-group">
+                            <button id="calcBtn">计算 10 + 20</button>
+                            <button id="compareBtn">比较 5 > 3</button>
+                            <button id="logicBtn">逻辑运算演示</button>
+                        </div>
+                        <div id="operatorOutput" class="output"></div>
+        </div>
+    </div>
+
+    <!-- 3. 条件判断 -->
+    <div class="card">
+        <h2>3. 条件判断 (if/else)</h2>
+        <div class="demo-box">
+            <p>输入你的年龄，判断是否可以看电影：</p>
+            <input type="number" id="ageInput" placeholder="请输入年龄">
+            <button id="checkAgeBtn">判断</button>
+            <div id="ageOutput" class="output"></div>
+        </div>
+    </div>
+
+    <!-- 4. 循环语句 -->
+    <div class="card">
+        <h2>4. 循环语句 (for/while)</h2>
+        <div class="demo-box">
+            <p><strong>for 循环：</strong> 打印 1 到 5</p>
+            <button id="forLoopBtn">执行 for 循环</button>
+            <p><strong>while 循环：</strong> 计算 1 到 10 的和</p>
+            <button id="whileLoopBtn">执行 while 循环</button>
+            <div id="loopOutput" class="output"></div>
+        </div>
+    </div>
+
+    <!-- 5. 函数 -->
+    <div class="card">
+        <h2>5. 函数</h2>
+        <div class="demo-box">
+            <p><strong>函数声明：</strong> function 函数名(参数) { return 结果 }</p>
+            <div class="btn-group">
+                <button id="greetBtn">调用打招呼函数</button>
+                <button id="sumBtn">调用求和函数 (5+3)</button>
+                <button id="multiplyBtn">调用乘法函数 (6×7)</button>
+            </div>
+            <div id="functionOutput" class="output"></div>
+        </div>
+    </div>
+
+    <!-- 6. 数组操作 -->
+    <div class="card">
+        <h2>6. 数组操作</h2>
+        <div class="demo-box">
+            <p>水果列表：苹果、香蕉、橘子、葡萄</p>
+            <div class="btn-group">
+                <button id="showArrayBtn">显示数组</button>
+                <button id="addFruitBtn">添加水果"芒果"</button>
+                <button id="removeLastBtn">删除最后一个</button>
+            </div>
+            <div id="arrayOutput" class="output"></div>
+        </div>
+    </div>
+
+    <!-- 7. 对象操作 -->
+    <div class="card">
+        <h2>7. 对象操作</h2>
+        <div class="demo-box">
+            <p>个人信息对象：姓名、年龄、城市</p>
+            <button id="showObjectBtn">显示个人信息</button>
+            <button id="updateCityBtn">修改城市为"上海"</button>
+            <div id="objectOutput" class="output"></div>
+        </div>
+    </div>
+
+    <!-- 8. DOM 操作实战 -->
+    <div class="card">
+        <h2>8. DOM 操作实战</h2>
+        <div class="demo-box">
+            <p id="textDemo">这是一段文字，点击按钮会改变我！</p>
+            <div class="btn-group">
+                <button id="changeTextBtn">改变文字</button>
+                <button id="changeColorBtn">改变颜色</button>
+                <button id="toggleBtn">显示/隐藏</button>
+                <button id="addElementBtn">添加新元素</button>
+            </div>
+            <div id="dynamicContainer"></div>
+        </div>
+    </div>
+
+    <!-- 9. 今日小结 -->
+    <div class="card">
+        <h2>今日小结</h2>
+        <ol>
+            <li><strong>变量</strong>：let, const 声明变量</li>
+            <li><strong>数据类型</strong>：字符串、数字、布尔、数组、对象</li>
+            <li><strong>运算符</strong>：算术、比较、逻辑</li>
+            <li><strong>条件判断</strong>：if/else 控制程序流程</li>
+            <li><strong>循环</strong>：for, while 重复执行</li>
+            <li><strong>函数</strong>：封装可复用代码</li>
+            <li><strong>DOM 操作</strong>：获取元素、修改内容、监听事件</li>
+        </ol>
+    </div>
+
+    <hr>
+    <p>
+        <a href="../../02-css/day06-grid/index.html">← 查看上一学习内容</a> |
+        <a href="#">⬆️ 返回顶部</a>
+    </p>
+    <script src="script.js"></script>
+</body>
+
+</html>

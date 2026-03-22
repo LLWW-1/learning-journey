@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid 网格布局</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Grid 网格布局</h1>
+    
+    <!-- 1. Grid 简介 -->
+    <div class="card">
+        <h2>什么是 Grid？</h2>
+        <p>Grid 是 CSS 最强的布局系统，可以同时控制行和列，实现二维布局。</p>
+        <div class="compare">
+            <div class="compare-item">
+                <strong>Flexbox（一维）</strong>
+                <p>主要控制一个方向（行或列）</p>
+                <div class="flex-demo">
+                    <span>1</span><span>2</span><span>3</span>
+                </div>
+            </div>
+            <div class="compare-item">
+                <strong>Grid（二维）</strong>
+                <p>同时控制行和列</p>
+                <div class="grid-demo">
+                    <span>1</span><span>2</span><span>3</span>
+                    <span>4</span><span>5</span><span>6</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 2. 基本网格 -->
+    <div class="card">
+        <h2>基本网格：3列 × 2行</h2>
+        <div class="basic-grid">
+            <div class="grid-item">1</div>
+            <div class="grid-item">2</div>
+            <div class="grid-item">3</div>
+            <div class="grid-item">4</div>
+            <div class="grid-item">5</div>
+            <div class="grid-item">6</div>
+        </div>
+        <pre><code>.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;  /* 3等分列 */
+    grid-template-rows: 100px 100px;     /* 2行各100px */
+    gap: 10px;                           /* 间距 */
+}</code></pre>
+    </div>
+    
+    <!-- 3. fr 单位演示 -->
+    <div class="card">
+        <h2>fr 单位：按比例分配空间</h2>
+        <p><code>1fr 2fr 1fr</code> → 1 : 2 : 1 的比例</p>
+        <div class="fr-grid">
+            <div class="grid-item">1fr</div>
+            <div class="grid-item">2fr</div>
+            <div class="grid-item">1fr</div>
+        </div>
+    </div>
+    
+    <!-- 4. repeat() 函数 -->
+    <div class="card">
+        <h2>repeat() 函数：简化重复写法</h2>
+        <p><code>repeat(4, 1fr)</code> = <code>1fr 1fr 1fr 1fr</code></p>
+        <div class="repeat-grid">
+            <div class="grid-item">1</div>
+            <div class="grid-item">2</div>
+            <div class="grid-item">3</div>
+            <div class="grid-item">4</div>
+        </div>
+    </div>
+    
+    <!-- 5. minmax() 响应式 -->
+    <div class="card">
+        <h2>minmax()：响应式列宽</h2>
+        <p><code>repeat(3, minmax(150px, 1fr))</code> → 最小150px，最大等分</p>
+        <div class="responsive-grid">
+            <div class="grid-item">最小150px</div>
+            <div class="grid-item">自适应</div>
+            <div class="grid-item">自适应</div>
+        </div>
+        <p><small>试试缩小浏览器窗口，看到列宽变化了吗？</small></p>
+    </div>
+    
+    <!-- 6. auto-fill 自动填充 -->
+    <div class="card">
+        <h2>auto-fill：自动填充列数</h2>
+        <p><code>repeat(auto-fill, minmax(120px, 1fr))</code> → 根据屏幕宽度自动决定列数</p>
+        <div class="auto-fill-grid">
+            <div class="grid-item">1</div>
+            <div class="grid-item">2</div>
+            <div class="grid-item">3</div>
+            <div class="grid-item">4</div>
+            <div class="grid-item">5</div>
+            <div class="grid-item">6</div>
+            <div class="grid-item">7</div>
+            <div class="grid-item">8</div>
+        </div>
+        <p><small>调整浏览器宽度，看列数自动变化！</small></p>
+    </div>
+    
+    <!-- 7. 网格项跨越 -->
+    <div class="card">
+        <h2>网格项跨越：合并单元格</h2>
+        <div class="span-grid">
+            <div class="grid-item span-2">跨越2列</div>
+            <div class="grid-item">2</div>
+            <div class="grid-item">3</div>
+            <div class="grid-item span-2-row">跨越2行</div>
+            <div class="grid-item">5</div>
+            <div class="grid-item">6</div>
+        </div>
+        <pre><code>.span-2 {
+    grid-column: span 2;  /* 跨越2列 */
+}
+.span-2-row {
+    grid-row: span 2;     /* 跨越2行 */
+}</code></pre>
+    </div>
+    
+    <!-- 8. 实战：个人作品集页面 -->
+    <div class="card">
+        <h2>实战：个人作品集页面</h2>
+        <div class="portfolio">
+            <header class="portfolio-header">
+                <h1>前端开发者</h1>
+                <p>热爱代码，热爱创造</p>
+            </header>
+            
+            <nav class="portfolio-nav">
+                <a href="#">首页</a>
+                <a href="#">项目</a>
+                <a href="#">关于</a>
+                <a href="#">联系</a>
+            </nav>
+            
+            <div class="portfolio-sidebar">
+                <h3>技能标签</h3>
+                <ul>
+                    <li>HTML5</li>
+                    <li>CSS3</li>
+                    <li>Flexbox</li>
+                    <li>Grid</li>
+                    <li>JavaScript</li>
+                </ul>
+            </div>
+            
+            <main class="portfolio-main">
+                <div class="project-card">
+                    <h3>📝 学习记录项目</h3>
+                    <p>用 HTML/CSS 搭建的学习笔记网站，记录了从零开始的前端学习过程。</p>
+                </div>
+                <div class="project-card">
+                    <h3>🎨 个人作品集</h3>
+                    <p>使用 Grid 布局制作的响应式作品集页面。</p>
+                </div>
+                <div class="project-card">
+                    <h3>📱 待办事项应用</h3>
+                    <p>使用 JavaScript 实现的交互式待办事项管理工具。</p>
+                </div>
+            </main>
+            
+            <footer class="portfolio-footer">
+                <p>© 2026 前端学习之旅 | 持续更新中</p>
+            </footer>
+        </div>
+        <p>这个作品集页面用 Grid 实现了完整的页面布局！</p>
+    </div>
+    
+    <!-- 9. 今日小结 -->
+    <div class="card">
+        <h2>今日小结</h2>
+        <ol>
+            <li><strong>display: grid</strong>：开启网格布局</li>
+            <li><strong>grid-template-columns/rows</strong>：定义网格结构</li>
+            <li><strong>fr</strong>：比例单位，按份数分配空间</li>
+            <li><strong>repeat()</strong>：简化重复写法</li>
+            <li><strong>minmax()</strong>：响应式列宽，设置最小最大范围</li>
+            <li><strong>auto-fill</strong>：自动填充列数</li>
+            <li><strong>grid-column/row: span n</strong>：合并单元格</li>
+        </ol>
+    </div>
+    
+    <hr>
+    <p>
+        <a href="../day05-flexbox/index.html">← 查看第五天学习内容</a> | 
+        <a href="#">⬆️ 返回顶部</a>
+    </p>
+</body>
+</html>
