@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript 高级操作</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            border-left: 4px solid #e94560;
+            padding-left: 12px;
+        }
+
+        .demo-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        button {
+            background: #e94560;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 5px;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: #0f3460;
+            transform: scale(1.02);
+        }
+
+        input,
+        select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            margin: 5px;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #e94560;
+        }
+
+        .output {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 10px 0;
+        }
+
+        .todo-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin: 8px 0;
+        }
+
+        .todo-item.completed {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+
+        .delete-btn {
+            background: #e94560;
+            padding: 5px 12px;
+            font-size: 12px;
+        }
+
+        hr {
+            margin: 20px 0;
+        }
+
+        a {
+            color: #e94560;
+            text-decoration: none;
+        }
+
+        .counter {
+            font-size: 48px;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px;
+            color: #e94560;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>JavaScript 高级操作</h1>
+
+    <!-- 1. 数组高级方法 -->
+    <div class="card">
+        <h2>1. 数组高级方法</h2>
+        <div class="demo-box">
+            <p><strong>原始数组：</strong> [1, 2, 3, 4, 5]</p>
+            <div class="btn-group">
+                <button id="forEachBtn">forEach 遍历</button>
+                <button id="mapBtn">map 乘以2</button>
+                <button id="filterBtn">filter 筛选偶数</button>
+                <button id="reduceBtn">reduce 求和</button>
+            </div>
+            <div id="arrayOutput" class="output"></div>
+        </div>
+    </div>
+
+    <!-- 2. 字符串方法 -->
+    <div class="card">
+        <h2>2. 字符串方法</h2>
+        <div class="demo-box">
+            <p><strong>原始字符串：</strong> " Hello, JavaScript! "</p>
+            <div class="btn-group">
+                <button id="trimBtn">trim 去空格</button>
+                <button id="upperBtn">toUpperCase 大写</button>
+                <button id="lowerBtn">toLowerCase 小写</button>
+                <button id="includesBtn">includes 检查是否包含"Java"</button>
+                <button id="splitBtn">split 按空格分割</button>
+            </div>
+            <div id="stringOutput" class="output"></div>
+        </div>
+    </div>
+
+    <!-- 3. 数字与随机数 -->
+    <div class="card">
+        <h2>3. 数字与随机数</h2>
+        <div class="demo-box">
+            <div class="btn-group">
+                <button id="randomBtn">生成随机数 (1-100)</button>
+                <button id="roundBtn">四舍五入演示</button>
+                <button id="fixBtn">保留两位小数</button>
+            </div>
+            <div id="numberOutput" class="output"></div>
+        </div>
+    </div>
+
+    <!-- 4. 定时器：倒计时器 -->
+    <div class="card">
+        <h2>4. 倒计时器 (setInterval)</h2>
+        <div class="demo-box">
+            <p>设置秒数：</p>
+            <input type="number" id="timerSeconds" value="10" min="1" max="60">
+            <div class="btn-group">
+                <button id="startTimerBtn">开始倒计时</button>
+                <button id="stopTimerBtn">停止</button>
+            </div>
+            <div id="timerOutput" class="output" style="font-size: 24px; text-align: center;"></div>
+        </div>
+    </div>
+
+    <!-- 5. 计算器 -->
+    <div class="card">
+        <h2>5. 简易计算器</h2>
+        <div class="demo-box">
+            <input type="number" id="calcNum1" placeholder="第一个数字">
+            <select id="calcOp">
+                <option value="+">+</option>
+                <option value="-">-</option>
+                <option value="*">×</option>
+                <option value="/">÷</option>
+            </select>
+            <input type="number" id="calcNum2" placeholder="第二个数字">
+            <button id="calcBtn">= 计算</button>
+            <div id="calcOutput" class="output"></div>
+        </div>
+    </div>
+
+    <!-- 6. 待办事项应用 -->
+    <div class="card">
+        <h2>6. 待办事项应用</h2>
+        <div class="demo-box">
+            <input type="text" id="todoInput" placeholder="输入待办事项">
+            <button id="addTodoBtn">添加</button>
+            <div id="todoList" class="output" style="background: white; color: #333;"></div>
+        </div>
+    </div>
+
+    <!-- 7. 今日小结 -->
+    <div class="card">
+        <h2>今日小结</h2>
+        <ol>
+            <li><strong>数组方法</strong>：forEach遍历、map转换、filter筛选、reduce累加</li>
+            <li><strong>字符串方法</strong>：trim去空格、toUpperCase大写、split分割、includes包含</li>
+            <li><strong>数字方法</strong>：Math.random随机数、Math.floor向下取整、toFixed保留小数</li>
+            <li><strong>定时器</strong>：setTimeout延迟执行、setInterval重复执行</li>
+            <li><strong>实战</strong>：倒计时器、计算器、待办事项应用</li>
+        </ol>
+    </div>
+
+    <hr>
+    <p>
+        <a href="../day07-js-basics/index.html">← 查看上一学习内容</a> |
+        <a href="#">⬆️ 返回顶部</a>
+    </p>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
