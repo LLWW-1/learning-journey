@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天气查询应用 | 异步编程与API调用</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            border-left: 4px solid #2a5298;
+            padding-left: 15px;
+        }
+
+        /* 演示区域 */
+        .demo-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            margin: 5px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        input {
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 16px;
+            width: 100%;
+            max-width: 300px;
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #2a5298;
+        }
+
+        .output {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            margin-top: 15px;
+            font-size: 14px;
+            word-break: break-word;
+        }
+
+        /* 天气卡片 */
+        .weather-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .weather-city {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .weather-temp {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .weather-desc {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .weather-info {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .weather-info-item {
+            text-align: center;
+        }
+
+        .weather-info-label {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .weather-info-value {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .error {
+            background: #fee;
+            color: #e94560;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .search-area {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #e94560;
+        }
+
+        hr {
+            margin: 20px 0;
+        }
+
+        a {
+            color: #2a5298;
+            text-decoration: none;
+        }
+
+        .footer {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 30px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🌤️ 第十天：天气查询应用</h1>
+
+        <!-- 1. 同步 vs 异步演示 -->
+        <div class="card">
+            <h2>⏱️ 同步 vs 异步</h2>
+            <div class="demo-section">
+                <p><strong>同步代码</strong>：一行一行执行，会阻塞后面代码</p>
+                <p><strong>异步代码</strong>：不会阻塞，稍后执行</p>
+                <div class="btn-group">
+                    <button id="syncBtn">同步演示</button>
+                    <button id="asyncBtn">异步演示 (setTimeout)</button>
+                    <button id="promiseBtn">Promise 演示</button>
+                </div>
+                <div id="asyncOutput" class="output">点击按钮查看执行顺序</div>
+            </div>
+        </div>
+
+        <!-- 2. Fetch API 演示 -->
+        <div class="card">
+            <h2>📡 Fetch API 演示</h2>
+            <div class="demo-section">
+                <p>获取 JSON 占位数据（模拟 API 请求）</p>
+                <div class="btn-group">
+                    <button id="fetchThenBtn">.then() 方式</button>
+                    <button id="fetchAsyncBtn">async/await 方式</button>
+                </div>
+                <div id="fetchOutput" class="output">点击按钮获取数据</div>
+            </div>
+        </div>
+
+        <!-- 3. 天气查询应用 -->
+        <div class="card">
+            <h2>🔍 查询天气</h2>
+            <div class="demo-section">
+                <div class="search-area">
+                    <input type="text" id="cityInput" placeholder="输入城市名称，如：北京、上海、成都" value="北京">
+                    <button id="searchBtn">🔍 查询天气</button>
+                </div>
+                <div id="weatherResult">
+                    <div class="weather-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <div class="weather-city">✨ 输入城市名称</div>
+                        <div class="weather-temp">--°C</div>
+                        <div class="weather-desc">点击查询按钮获取天气</div>
+                        <div class="weather-info">
+                            <div class="weather-info-item">
+                                <div class="weather-info-label">湿度</div>
+                                <div class="weather-info-value">--%</div>
+                            </div>
+                            <div class="weather-info-item">
+                                <div class="weather-info-label">风速</div>
+                                <div class="weather-info-value">-- km/h</div>
+                            </div>
+                            <div class="weather-info-item">
+                                <div class="weather-info-label">气压</div>
+                                <div class="weather-info-value">-- hPa</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p style="margin-top: 15px; font-size: 12px; color: #666;">
+                    💡 提示：数据来自 OpenWeatherMap 免费 API，每天有限额，请合理使用
+                </p>
+            </div>
+        </div>
+
+        <!-- 4. 今日小结 -->
+        <div class="card">
+            <h2>📝 今日小结</h2>
+            <ol>
+                <li><strong>异步编程</strong>：setTimeout、Promise、async/await</li>
+                <li><strong>Promise 状态</strong>：pending、fulfilled、rejected</li>
+                <li><strong>Fetch API</strong>：发送网络请求获取数据</li>
+                <li><strong>async/await</strong>：让异步代码像同步一样写</li>
+                <li><strong>实战项目</strong>：天气查询应用</li>
+            </ol>
+        </div>
+
+        <hr>
+        <p>
+            <a href="../day09-localstorage/index.html">← 查看上一学习内容</a> |
+            <a href="#">⬆️ 返回顶部</a>
+        </p>
+        <div class="footer">
+            <p>天气数据来自 OpenWeatherMap</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
