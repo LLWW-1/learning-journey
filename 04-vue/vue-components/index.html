@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 12 - Vue 组件化开发</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #42b883 0%, #35495e 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            border-left: 4px solid #42b883;
+            padding-left: 15px;
+        }
+
+        .demo-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #42b883 0%, #35495e 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            margin: 5px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        input {
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            width: 100%;
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #42b883;
+        }
+
+        .output {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            margin-top: 15px;
+        }
+
+        /* 待办事项样式 */
+        .todo-input-area {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .todo-input-area input {
+            flex: 1;
+        }
+
+        .todo-list {
+            list-style: none;
+        }
+
+        .todo-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            transition: all 0.3s;
+        }
+
+        .todo-item:hover {
+            background: #e9ecef;
+        }
+
+        .todo-item.completed span {
+            text-decoration: line-through;
+            color: #999;
+        }
+
+        .todo-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .todo-checkbox {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .todo-text {
+            cursor: pointer;
+        }
+
+        .delete-btn {
+            background: #e94560;
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px solid #e0e0e0;
+            color: #666;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            background: #e9ecef;
+            color: #2c3e50;
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        .filter-btn.active {
+            background: #42b883;
+            color: white;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #42b883;
+        }
+
+        hr {
+            margin: 20px 0;
+        }
+
+        a {
+            color: #42b883;
+            text-decoration: none;
+        }
+
+        .footer {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 30px;
+        }
+
+        .component-demo {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 15px 0;
+            border: 2px dashed #42b883;
+        }
+
+        .demo-title {
+            font-weight: bold;
+            color: #42b883;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="container">
+            <h1>Vue 组件化开发</h1>
+
+            <!-- 1. 全局组件演示 -->
+            <div class="card">
+                <h2>🌍 全局组件</h2>
+                <div class="demo-section">
+                    <p>可以在任何地方使用的组件：</p>
+                    <div class="component-demo">
+                        <div class="demo-title">✨ 自定义按钮组件</div>
+                        <custom-button text="点我试试" @click="showMessage"></custom-button>
+                        <custom-button text="另一个按钮" @click="showMessage"></custom-button>
+                    </div>
+                    <div class="component-demo">
+                        <div class="demo-title">📦 卡片组件</div>
+                        <info-card title="组件化开发" content="组件让代码可以复用，提高开发效率！"></info-card>
+                        <info-card title="Vue 核心" content="响应式数据、组件化、指令系统"></info-card>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. 局部组件演示 -->
+            <div class="card">
+                <h2>📦 局部组件</h2>
+                <div class="demo-section">
+                    <p>只在当前组件内可用的组件：</p>
+                    <div class="component-demo">
+                        <div class="demo-title">📊 进度条组件</div>
+                        <progress-bar :percent="75"></progress-bar>
+                        <progress-bar :percent="45"></progress-bar>
+                        <progress-bar :percent="90"></progress-bar>
+                        <button @click="randomPercent">随机进度</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. 组件通信实战：待办事项应用 -->
+            <div class="card">
+                <h2>✅ 组件化待办事项应用</h2>
+                <div class="demo-section">
+                    <!-- 输入组件 -->
+                    <todo-input @add-todo="addTodo"></todo-input>
+
+                    <!-- 过滤按钮组件 -->
+                    <filter-buttons :current-filter="filter" @change-filter="filter = $event"></filter-buttons>
+
+                    <!-- 列表组件 -->
+                    <todo-list :todos="filteredTodos" @toggle-todo="toggleTodo" @delete-todo="deleteTodo">
+                    </todo-list>
+
+                    <!-- 统计组件 -->
+                    <todo-stats :total="todos.length" :completed="completedCount" :remaining="remainingCount"
+                        @clear-completed="clearCompleted">
+                    </todo-stats>
+                </div>
+            </div>
+
+            <!-- 4. 今日小结 -->
+            <div class="card">
+                <h2>📝 今日小结</h2>
+                <ol>
+                    <li><strong>全局组件</strong>：Vue.component() 定义，任何地方可用</li>
+                    <li><strong>局部组件</strong>：在 components 选项中注册，只在该组件内可用</li>
+                    <li><strong>props</strong>：父组件向子组件传递数据</li>
+                    <li><strong>$emit</strong>：子组件向父组件传递事件</li>
+                    <li><strong>slot</strong>：内容分发，让组件更灵活</li>
+                    <li><strong>实战项目</strong>：用组件重构待办事项应用</li>
+                </ol>
+            </div>
+
+            <hr>
+            <p>
+                <a href="../day11-vue-basics/index.html">← 查看上一学习内容</a> |
+                <a href="#">⬆️ 返回顶部</a>
+            </p>
+            <div class="footer">
+                <p>Vue 组件化开发</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
