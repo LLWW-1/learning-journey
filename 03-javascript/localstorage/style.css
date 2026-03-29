@@ -1,0 +1,276 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 30px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* 添加笔记区域 */
+.add-note {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+}
+
+.add-note input,
+.add-note textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-bottom: 12px;
+    font-family: inherit;
+    transition: border-color 0.3s;
+}
+
+.add-note input:focus,
+.add-note textarea:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.add-note textarea {
+    resize: vertical;
+}
+
+/* 按钮样式 */
+.btn-group {
+    display: flex;
+    gap: 12px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    flex: 1;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-danger {
+    background: #e74c3c;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #c0392b;
+}
+
+.btn-edit {
+    background: #3498db;
+    color: white;
+    padding: 6px 12px;
+    font-size: 12px;
+}
+
+.btn-edit:hover {
+    background: #2980b9;
+}
+
+.btn-delete {
+    background: #e74c3c;
+    color: white;
+    padding: 6px 12px;
+    font-size: 12px;
+}
+
+.btn-delete:hover {
+    background: #c0392b;
+}
+
+/* 搜索框 */
+.search-box {
+    margin-bottom: 20px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.search-box input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* 统计信息 */
+.stats {
+    background: #f0f0f0;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #666;
+}
+
+.stats strong {
+    color: #667eea;
+    font-size: 18px;
+}
+
+/* 笔记列表 */
+.notes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.note-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 18px;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.note-card:hover {
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.note-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    padding-right: 100px;
+}
+
+.note-content {
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.note-date {
+    font-size: 0.75rem;
+    color: #999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.note-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* 空状态 */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #999;
+}
+
+.empty-state p {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.empty-state small {
+    font-size: 0.85rem;
+}
+
+/* 编辑模式 */
+.note-card.editing .note-title,
+.note-card.editing .note-content {
+    display: none;
+}
+
+.edit-input,
+.edit-textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #667eea;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    font-family: inherit;
+}
+
+.edit-textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.edit-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+/* 响应式 */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    .note-title {
+        padding-right: 0;
+    }
+
+    .note-date {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

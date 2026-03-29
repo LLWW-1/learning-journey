@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>笔记应用 | 本地存储实战</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>我的笔记应用</h1>
+            <p>使用 localStorage 保存笔记，刷新页面也不会丢失！</p>
+        </header>
+
+        <!-- 添加笔记区域 -->
+        <div class="add-note">
+            <input type="text" id="noteTitle" placeholder="笔记标题">
+            <textarea id="noteContent" rows="3" placeholder="写下你的想法..."></textarea>
+            <div class="btn-group">
+                <button id="addBtn" class="btn-primary">➕ 添加笔记</button>
+                <button id="clearAllBtn" class="btn-danger">🗑️ 清空所有</button>
+            </div>
+        </div>
+
+        <!-- 搜索区域 -->
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="🔍 搜索笔记标题...">
+        </div>
+
+        <!-- 统计信息 -->
+        <div class="stats" id="stats">
+            <span>📊 总计: <strong id="totalCount">0</strong> 条笔记</span>
+        </div>
+
+        <!-- 笔记列表 -->
+        <div id="notesList" class="notes-list"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
