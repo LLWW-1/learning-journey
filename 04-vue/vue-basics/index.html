@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js 框架入门</title>
+    <style>
+        /* 你的所有样式保持不变 */
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="container">
+            <h1>Vue.js 框架入门</h1>
+
+            <!-- 1. Vue 基础演示 -->
+            <div class="card">
+                <h2>📌 Vue 基础：响应式数据</h2>
+                <div class="demo-section">
+                    <p>输入框的值会自动同步到下面：</p>
+                    <input type="text" v-model="message" placeholder="输入点什么...">
+                    <div class="output">你输入的内容：{{ message }}</div>
+                    <div class="counter">{{ message.length }} 个字符</div>
+                    <div class="btn-group">
+                        <button @click="message = ''">清空</button>
+                        <button @click="message = message.toUpperCase()">转大写</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Vue 指令演示 -->
+            <div class="card">
+                <h2>🎯 Vue 指令：v-if / v-show / v-for</h2>
+                <div class="demo-section">
+                    <div class="btn-group">
+                        <button @click="show = !show">切换显示 (v-if)</button>
+                        <button @click="toggleVisible">切换显示 (v-show)</button>
+                    </div>
+                    <div v-if="show" class="output" style="background: #42b883;">✅ v-if: 元素会被销毁/重建</div>
+                    <div v-show="visible" class="output" style="background: #35495e;">👁️ v-show: 元素只是隐藏/显示</div>
+
+                    <p><strong>水果列表 (v-for)：</strong></p>
+                    <ul>
+                        <li v-for="(fruit, index) in fruits" :key="index">
+                            {{ index + 1 }}. {{ fruit }}
+                            <button @click="removeFruit(index)">删除</button>
+                        </li>
+                    </ul>
+                    <div class="btn-group">
+                        <input type="text" v-model="newFruit" placeholder="添加水果" @keyup.enter="addFruit">
+                        <button @click="addFruit">添加</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Vue 笔记应用 -->
+            <div class="card">
+                <h2>📝 Vue 笔记应用</h2>
+                <div class="demo-section">
+                    <div>
+                        <input type="text" v-model="newNote.title" placeholder="标题...">
+                        <textarea v-model="newNote.content" placeholder="写点什么..." rows="3"></textarea>
+                        <button @click="addNote">➕ 添加笔记</button>
+                        <button @click="deleteAllNotes" class="delete-btn">🗑️ 删除全部</button>
+                    </div>
+
+                    <div class="stats">
+                        共 {{ notes.length }} 条笔记 | 已完成 {{ completedCount }} 条
+                    </div>
+
+                    <div class="notes-grid">
+                        <div v-for="note in notes" :key="note.id" class="note-card"
+                            :class="{ 'edit-mode': note.isEditing }">
+                            <div v-if="!note.isEditing">
+                                <div class="note-title">{{ note.title || '无标题' }}</div>
+                                <div class="note-content">{{ note.content || '无内容' }}</div>
+                                <div class="note-date">📅 {{ note.date }}</div>
+                                <div class="note-actions">
+                                    <button class="edit-btn" @click="startEdit(note.id)">✏️ 编辑</button>
+                                    <button class="delete-note-btn delete-btn" @click="deleteNote(note.id)">🗑️
+                                        删除</button>
+                                    <button @click="toggleComplete(note.id)"
+                                        :style="{background: note.completed ? '#42b883' : '#95a5a6'}">
+                                        {{ note.completed ? '✅ 已完成' : '◻️ 标记完成' }}
+                                    </button>
+                                </div>
+                            </div>
+                            <div v-else>
+                                <input type="text" v-model="note.editTitle" placeholder="标题...">
+                                <textarea v-model="note.editContent" placeholder="内容..." rows="3"></textarea>
+                                <div class="note-actions">
+                                    <button @click="saveEdit(note.id)">💾 保存</button>
+                                    <button @click="cancelEdit(note.id)">❌ 取消</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div v-if="notes.length === 0" class="empty-state">
+                            <div>📭</div>
+                            <p>暂无笔记，写点什么吧！</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+            <p>
+                <a href="../../03-javascript/day10-async-api/index.html">← 查看上一学习内容</a> |
+                <a href="#">⬆️ 返回顶部</a>
+            </p>
+            <div class="footer">
+                <p>Vue.js 框架入门</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
